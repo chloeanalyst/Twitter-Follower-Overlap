@@ -4,6 +4,8 @@ library(tidyverse)
 library(rtweet)
 library(VennDiagram)
 
+
+
 # Set the accounts you'd like to analyse
 
 a_name <- "TWITTER USER HANDLE GOES HERE"
@@ -11,12 +13,31 @@ b_name <- "TWITTER USER HANDLE GOES HERE"
 c_name <- "TWITTER USER HANDLE GOES HERE"
 d_name <- "TWITTER USER HANDLE GOES HERE"
 
-# Connect to the Twitter API using the rtweet package to collect user IDs
 
-a <- get_followers(a_name, retryonratelimit = TRUE)
-b <- get_followers(b_name, retryonratelimit = TRUE)
-c <- get_followers(c_name, retryonratelimit = TRUE)
-d <- get_followers(d_name, retryonratelimit = TRUE)
+
+# Connect to the Twitter API using the rtweet package to collect user IDs
+# If you would like a sample of the followers replace X_lookup$followers_count with a number of your choice or a sampling function
+
+a_lookup <- lookup_users(a_name)
+n = a_lookup$followers_count
+a <- get_followers(a_name, n = n, retryonratelimit = TRUE)
+
+
+b_lookup <- lookup_users(b_name)
+n = b_lookup$followers_count
+b <- get_followers(b_name, n = n, retryonratelimit = TRUE)
+
+
+c_lookup <- lookup_users(c_name)
+n = c_lookup$followers_count
+c <- get_followers(c_name, n = n, retryonratelimit = TRUE)
+
+
+d_lookup <- lookup_users(d_name)
+n = d_lookup$followers_count
+d <- get_followers(d_name, n = n, retryonratelimit = TRUE)
+
+
 
 # Create a venn diagram to showcase the results
 # x = Pulls in the user IDs collected from twitter for each user, extend/reduce as needed
